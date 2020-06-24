@@ -2,10 +2,8 @@
 class Hangman
 
     def initialize 
-        @letters = ('a'..'z').to_a
         @word = words.sample
         @lives = 6
-        @correct_guesses = []
         @word_teaser = ""
  
         @word.first.size.times do 
@@ -18,8 +16,8 @@ class Hangman
         [
         ["cricket", "A game Played by Gentlemen"],
         ["jogging", "We are not wailking..."],
-        ["celecrate", "Remenbering special moments"],
-        ["continent", "Threr are 7 of these"],
+        ["celebrate", "Remembering special moments"],
+        ["continent", "There are 7 of these"],
         ["exotic", "Not from around here..."],
         ]
     end
@@ -32,8 +30,8 @@ class Hangman
     def update_teaser last_guess
         new_teaser = @word_teaser.split
 
-        #['_', '_', '_'] replace blank values with letter if matches letter in word
         new_teaser.each_with_index do |letter, index|
+            #['_', '_', '_'] replace blank values with letter if matches letter in word
             if letter == '_' && @word.first[index] == last_guess
                 new_teaser[index] = last_guess
             end
@@ -45,7 +43,9 @@ class Hangman
 
     def make_guess 
         if @lives > 0 
-        puts "Enter a letter"
+            puts "^^^^^^^^^^^^^^"
+            puts "ENTER A LETTER!"
+            puts "^^^^^^^^^^^^^^"
             guess = gets.chomp
 
             # if letter is not part of the word then remove from letters array 
@@ -56,16 +56,20 @@ class Hangman
                 puts "Thank You For Playing!"
                 puts "-------------------------"
             elsif good_guess
+                puts "%%%%%%%%%%%%%%%%"
                 puts "You Are Correct!"
+                puts "%%%%%%%%%%%%%%%%"
 
-                @correct_guesses << guess
+                print_teaser guess 
 
-                #remove correct guess from Alphabet
-                @letters.delete guess
+                if @word.first == @word_teaser.split.join
+                    puts "*********************************************"
+                    puts "Congratulations!!!!, You Have Won This Round!"
+                    puts "*********************************************" 
+                else
+                    make_guess
+                end
 
-
-                print_teaser guess
-                make_guess
             else
                 @lives -= 1
                 puts "Sorry, You Have #{ @lives } Lives Left. Try Again!"
@@ -81,14 +85,20 @@ class Hangman
 
     def begin
         #ask user for a letter
+        puts "-----------------------------------------------------------------------"
         puts "New game started.... your word is #{ @word.first.size } characters long"
+        puts "-----------------------------------------------------------------------"
+
         puts "---------------------------------------"
         puts "To Exit Game At Any Point, Type 'exit' " 
         puts "---------------------------------------"
 
         print_teaser
-
+        puts "                     "
+        puts "                     "
         puts "Clue: #{ @word.last }"
+        puts "                     "
+        puts "                     "
 
         make_guess
     end
