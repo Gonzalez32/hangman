@@ -1,4 +1,4 @@
-# hangman
+# Hangman
 Ruby Hangman-game
 
 USER
