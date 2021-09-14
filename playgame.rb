@@ -49,9 +49,30 @@ class Game
                 puts "Thank you for playing see you next time."
                 puts "########################################"
             elsif good_guess
-                
+                puts "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
+                puts "You are correct keep going lad!"
+                puts "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
 
+                print_teaser guess
+
+                if @word.first == @word_teaser.split.join
+                    puts "Congratulations!!! Yay you have won this round!"
+                else
+                    make_guess
+                end
+            
+            else
+                @lives -=1
+                puts "Sorry, you have #{ @lives } lives left... Try again lad."
+                make_guess
+            end
+        else
+            puts "GAME OVER! Better luck next time."
+        end
     end
 
+    def begin
+        # asked user for a letter
+        puts "next time line 76"
 
 end
