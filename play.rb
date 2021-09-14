@@ -57,7 +57,7 @@ class Hangman
                 puts "-------------------------"
             elsif good_guess
                 puts "%%%%%%%%%%%%%%%%"
-                puts "You Are Correct!"
+                puts "You Are Correct Keep Going!"
                 puts "%%%%%%%%%%%%%%%%"
 
                 print_teaser guess 
